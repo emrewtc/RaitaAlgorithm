@@ -12,6 +12,13 @@ public class RaitaSearch
 	public static int comparision = 0;
 	public static long totalTime;
 	public static boolean hasFound = false;
+
+	// Step by Step variables
+	public static boolean willShift = false; 
+	public static int compStartIndex;
+	//public static int lastChIndex;
+	//public static int firstChIndex;
+	//public static int midChIndex;
 	// Pre-Processing, bad character table values...
 	
 	public static void preBmBc(char[] pattern, int patternSize, int[] bmBc)
@@ -82,6 +89,11 @@ public class RaitaSearch
 	            }
 	        }
 	        
+	        else
+	        {
+	        	
+	        }
+	        
 	        	i += bmBc[c]; // shift //
 	    	
 	    }
@@ -141,6 +153,80 @@ public class RaitaSearch
 		
 	}
 	
+	
+	/*
+	public static void RaitaStepByStep(char[] text, char[] pattern)
+	{
+		int i;
+		matchCount=0; 
+		comparision = 0;
+		matchIndex.clear();
+		hasFound = false;
+		int textSize = text.length;
+		int patternSize = pattern.length;
+		char c, firstCh,middleCh,lastCh;
+		char[] shiftedText = new char[patternSize];
+		int[] bmBc = new int[65536]; // size of an integer is 4 bytes = 16 bits = 2^16 = 65536
+		
+		// Pre-Processing
+		preBmBc(pattern, patternSize, bmBc);
+	    firstCh = pattern[0];
+	    middleCh = pattern[patternSize/2];
+	    lastCh = pattern[patternSize-1];
+
+	    
+	    i = 0;
+	    if(willShift && i <= textSize - patternSize)
+	    {
+	        c = text[i + patternSize - 1];
+	        // Last character matching check
+	        if (lastCh == c)
+	        {
+	            comparision++;
+	            
+	            // First character matching check
+	            if(firstCh == text[i])
+	            {
+	                comparision++;
+	                // Middle character matching check
+	                if(middleCh == text[i + patternSize/2])
+	                {
+	                	shiftedText = new char[patternSize];
+	                    comparision++;
+	                    shiftedText = Arrays.copyOfRange(text, i, i + patternSize);
+	                    
+	                    if(Arrays.equals(pattern, shiftedText))
+	                    {
+	                        comparision += patternSize;
+	                        System.out.println("Pattern is found at " + i);
+	                        matchCount++;
+	                        matchIndex.add(i);
+	                        hasFound = true;
+	                        //i += bmBc[c];
+	                        //System.out.println("C Value " + bmBc[c]);
+	                        
+	                    }
+	                }
+	                
+	            }
+	        }
+	        
+	        	i += bmBc[c]; // shift //
+	        	willShift = false;
+	    	
+	    }
+
+		
+		if(matchCount == 0)
+		{
+			System.out.println("Couldn't Found");
+			hasFound = false;
+			
+		}
+		
+		
+	}
+	*/
 	
 	public static void main(String[] args) 
 	{
